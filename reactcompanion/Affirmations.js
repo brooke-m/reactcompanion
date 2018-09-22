@@ -2,9 +2,9 @@ import React from 'react';
 import { Button, Image, View, Text, StyleSheet } from 'react-native';
 import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
-export default class Login extends React.Component {
+export default class Affirmations extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Login',
+    drawerLabel: 'Affirmations',
     drawerIcon: ({ tintColor }) => (
       <Image
         source={require('./companion.png')}

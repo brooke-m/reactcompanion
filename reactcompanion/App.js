@@ -1,6 +1,15 @@
 import React from 'react';
-import { Button, Image, View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation'; // 1.0.0-beta.27
+import { Button, Alert, Image, Icon, View, Text, StyleSheet } from 'react-native';
+import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+
+import SignUp from './SignUp';
+import Login from './Login';
+import Vent from './Vent';
+import Settings from './Settings';
+import Mood from './Mood';
+import Crisis from './Crisis';
+import Affirmations from './Affirmations';
+import Task from './Task';
 
 class LogoTitle extends React.Component {
   render() {
@@ -15,152 +24,103 @@ class LogoTitle extends React.Component {
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
+
 
     return {
+      // <Header
+      //   leftComponent={{ icon: 'menu', color: '#fff' }}
+      //   centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+      //   rightComponent={{ icon: 'home', color: '#fff' }}
+      // />
       headerTitle: <LogoTitle />,
       headerLeft: (
         <Button
-          onPress={() => navigation.navigate('MyModal')}
+          onPress={() => this.props.navigation.openDrawer()}
           title="Info"
           color="#fff"
         />
       ),
       headerRight: (
-        <Button onPress={params.increaseCount} title="+1" color="#fff" />
+        <Button onPress={() => Alert.alert("This is the home screen")} title="i" color="#fff" />
       ),
     };
-  };
-
-  componentWillMount() {
-    this.props.navigation.setParams({ increaseCount: this._increaseCount });
-  }
-
-  state = {
-    count: 0,
-  };
-
-  _increaseCount = () => {
-    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
-        <Text>Count: {this.state.count}</Text>
+
         <Button
-          title="Go to Details"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            this.props.navigation.navigate('Details', {
-              itemId: 86,
-              otherParam: 'First Details',
-            });
-          }}
+          title="Menu"
+          onPress={() => this.props.navigation.openDrawer()}
         />
       </View>
     );
   }
 }
 
-class DetailsScreen extends React.Component {
-  static navigationOptions = ({ navigation, navigationOptions }) => {
-    const { params } = navigation.state;
-
-    return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
-      /* These values are used instead of the shared configuration! */
-      headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
-      },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor,
-    };
+class MyNotificationsScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Notifications',
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require('./companion.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
   };
 
   render() {
-    /* 2. Read the params from the navigation state */
-    const { params } = this.props.navigation.state;
-    const itemId = params ? params.itemId : null;
-    const otherParam = params ? params.otherParam : null;
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
         <Button
-          title="Update the title"
-          onPress={() =>
-            this.props.navigation.setParams({ otherParam: 'Updated!' })}
-        />
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-        <Button
-          title="Go back"
           onPress={() => this.props.navigation.goBack()}
+          title="Go back home"
+        />
+        <Button
+          title="Home"
+          onPress={() => this.props.navigation.navigate('Home')}
         />
       </View>
     );
   }
 }
 
-class ModalScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Dismiss"
-        />
-      </View>
-    );
-  }
-}
-
-const MainStack = StackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailsScreen,
-    },
+const styles = StyleSheet.create({
+  icon: {
+    width: 24,
+    height: 24,
   },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  }
-);
+});
 
-const RootStack = StackNavigator(
-  {
-    Main: {
-      screen: MainStack,
-    },
-    MyModal: {
-      screen: ModalScreen,
-    },
+const MyApp = createDrawerNavigator({
+  Home: {
+    screen: HomeScreen,
   },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  }
-);
+  Affirmations: {
+    screen: Affirmations,
+  },
+  Crisis: {
+    screen: Crisis,
+  },
+  Mood: {
+    screen: Mood,
+  },
+  Task: {
+    screen: Task,
+  },
+  Vent: {
+    screen: Vent,
+  },
+  Settings: {
+    screen: Settings,
+  },
+
+});
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />;
+    return <MyApp />;
   }
 }

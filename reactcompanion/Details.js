@@ -5,7 +5,7 @@ import React from 'react';
 import { Button, Image, View, Text, StyleSheet } from 'react-native';
 import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
-export Details class DetailsScreen extends React.Component {
+export default class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation, navigationOptions }) => {
     const { params } = navigation.state;
 

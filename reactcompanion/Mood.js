@@ -1,6 +1,10 @@
 import React from 'react';
-import { Button, Image, View, Text, StyleSheet } from 'react-native';
+import { Button, Alert, Image, Icon, View, Text, StyleSheet, Platform, StatusBar } from 'react-native';
 import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import LinearGradient from "react-native-linear-gradient";
+import {Container, Content, Header, Body, Title} from 'native-base';
+
+import CustomHeader from './CustomHeader';
 
 export default class Mood extends React.Component {
   static navigationOptions = {
@@ -12,24 +16,36 @@ export default class Mood extends React.Component {
       />
     ),
   };
+  constructor(props) {
+    super(props);
+    this.state = {title: 'Mood',
+    description: 'This is the mood page'
+  };
+}
 
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-        />
-        <Button
-          title="Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Menu"
-          onPress={() => this.props.navigation.openDrawer()}
-        />
-      </View>
+render() {
+  return (
+    <Container>
+      <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
+        <Content>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Button
+            onPress={() => this.props.navigation.goBack()}
+            title="Go back home"
+          />
+          <Button
+            title="Home"
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+          <Button
+            title="Menu"
+            onPress={() => this.props.navigation.openDrawer()}
+          />
+        </View>
+        </Content>
+      </Container>
     );
+
   }
 }
 const styles = StyleSheet.create({

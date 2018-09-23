@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Alert, Image, Icon, View, Text, StyleSheet } from 'react-native';
+import { Button, Alert, Image, Icon, View, Text, StyleSheet, Platform, StatusBar } from 'react-native';
 import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import LinearGradient from "react-native-linear-gradient";
+import {Container, Content, Header, Body, Title} from 'native-base';
 
 import SignUp from './SignUp';
 import Login from './Login';
@@ -11,78 +13,36 @@ import Crisis from './Crisis';
 import Affirmations from './Affirmations';
 import Task from './Task';
 
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <Image
-        source={require('./companion.png')}
-        style={{ width: 30, height: 30 }}
-      />
-    );
-  }
-}
+import CustomHeader from './CustomHeader';
 
 class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-
-
-    return {
-      // <Header
-      //   leftComponent={{ icon: 'menu', color: '#fff' }}
-      //   centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-      //   rightComponent={{ icon: 'home', color: '#fff' }}
-      // />
-      headerTitle: <LogoTitle />,
-      headerLeft: (
-        <Button
-          onPress={() => this.props.navigation.openDrawer()}
-          title="Info"
-          color="#fff"
-        />
-      ),
-      headerRight: (
-        <Button onPress={() => Alert.alert("This is the home screen")} title="i" color="#fff" />
-      ),
+  static navigationOptions = ({ navigation }) => ({
+    title: `Companion Home`,
+     headerTitleStyle : {textAlign: 'center',alignSelf:'center'},
+        headerStyle:{
+            backgroundColor:'white',
+        },
+    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: 'Home',
+      description: 'This is the home page'
     };
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-
-        <Button
-          title="Menu"
-          onPress={() => this.props.navigation.openDrawer()}
-        />
-      </View>
-    );
   }
-}
-
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('./companion.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-        />
-        <Button
-          title="Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-      </View>
+      <Container>
+        <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
+        <Content>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen</Text>
+
+            <Button title="Menu" onPress={() => this.props.navigation.openDrawer()} />
+          </View>
+        </Content>
+      </Container>
     );
   }
 }
@@ -91,6 +51,14 @@ const styles = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
+  },
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: this.width,
+    backgroundColor: '#fff',
   },
 });
 
@@ -116,7 +84,6 @@ const MyApp = createDrawerNavigator({
   Settings: {
     screen: Settings,
   },
-
 });
 
 export default class App extends React.Component {

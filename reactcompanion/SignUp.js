@@ -18,15 +18,16 @@ export default class SignUp extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {title: 'SignUp',
-    description: 'This is the signup page'
+    this.state = {
+      title: 'Login',
+      description: 'This is the SignUp page'
   };
 }
 
 render() {
   return (
     <Container>
-      <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
+      <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description={this.state.description} />
         <Content>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Button

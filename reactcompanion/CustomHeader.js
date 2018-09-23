@@ -29,7 +29,23 @@ class CustomHeader extends React.Component {
     )
   }
 }
-
+// <Container>
+//   <Header>
+//     <Left>
+//       <Button transparent ref={component => this._root = component} {...this.props} style={{alignItems: 'auto'}} onPress={this.props.link} title="Menu" color="#000" >
+//         <Icon name="ios-menu" size={30} color="#900" />
+//       </Button>
+//     </Left>
+//     <Body ref={component => this._root = component} {...this.props} style={{alignItems: 'center', flex: 4}}>
+//       <Title style={{color:'#000'}}>{this.props.title}</Title>
+//     </Body>
+//     <Right>
+//       <Button ref={component => this._root = component} {...this.props} style={{alignItems: 'auto'}} onPress={() => alert(this.props.description)} title="Info" color="#000">
+//         <Icon name="ios-menu" size={30} color="#900" />
+//       </Button>
+//     </Right>
+//   </Header>
+// </Container>
 export default CustomHeader;
 
 const styles = StyleSheet.create({

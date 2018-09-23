@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Alert, Image, Icon, View, Text, StyleSheet, Platform, StatusBar } from 'react-native';
+import { TextInput, Button, Alert, Image, Icon, View, Text, StyleSheet, Platform, StatusBar } from 'react-native';
 import { StackNavigator, DrawerItems, SafeAreaView, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 import LinearGradient from "react-native-linear-gradient";
-import {Container, Content, Header, Body, Title} from 'native-base';
+import {Container, Content, Header, Footer, Body, Title, Item} from 'native-base';
 
 import CustomHeader from './CustomHeader';
 
@@ -19,7 +19,8 @@ export default class Vent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {title: 'Vent',
-    description: 'This is the vent page'
+      description: 'This is the vent page',
+      text: ''
   };
 }
 
@@ -28,21 +29,19 @@ render() {
     <Container>
       <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
         <Content>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Button
-            onPress={() => this.props.navigation.goBack()}
-            title="Go back home"
-          />
-          <Button
-            title="Home"
-            onPress={() => this.props.navigation.navigate('Home')}
-          />
-          <Button
-            title="Menu"
-            onPress={() => this.props.navigation.openDrawer()}
-          />
-        </View>
+
         </Content>
+        <Footer>
+          <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', padding:10, paddingRight:100}}>
+            <TextInput
+              placeholder="Vent here!"
+              style={{height: 40, flex:1, borderColor: 'gray', borderWidth: 1, padding:10}}
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}></TextInput>
+            <Button style={{alignItems: 'Right'}} onPress={() => alert(this.props.description)} title="Send" color="#000" />
+
+          </View>
+        </Footer>
       </Container>
     );
 

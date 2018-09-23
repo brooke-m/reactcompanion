@@ -27,23 +27,40 @@ class HomeScreen extends React.Component {
     super(props);
     this.state = {
       title: 'Home',
-      description: 'This is the home page'
+      description: 'This is the home page',
+      loggedIn: false
     };
   }
 
-  render() {
-    return (
-      <Container>
-        <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
-        <Content>
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen</Text>
 
-            <Button title="Menu" onPress={() => this.props.navigation.openDrawer()} />
-          </View>
-        </Content>
-      </Container>
-    );
+  render() {
+
+      if (this.state.loggedIn) {
+        return (
+          <Container>
+            <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
+            <Content>
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Home Screen</Text>
+
+                <Button title="Menu" onPress={() => this.props.navigation.openDrawer()} />
+              </View>
+            </Content>
+          </Container>
+        );
+      }
+      else {
+        return (
+          <Container>
+            <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
+            <Content>
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Button title="Login" onPress={() => this.props.navigation.navigate('Login')} />
+              </View>
+            </Content>
+          </Container>
+        );
+      }
   }
 }
 
@@ -65,6 +82,9 @@ const styles = StyleSheet.create({
 const MyApp = createDrawerNavigator({
   Home: {
     screen: HomeScreen,
+  },
+  Login: {
+    screen: Login,
   },
   Affirmations: {
     screen: Affirmations,

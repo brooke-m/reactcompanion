@@ -19,19 +19,37 @@ export default class Affirmations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {title: 'Affirmations',
-    description: 'This is the affirmations page'
+    description: 'This is the affirmations page',
+    affirmation: "Self-care is how you take your power back.",
+    affirmations: ["Self-care is how you take your power back.",
+      "Every day and in every way I am getting better and better",
+      "I know you're tired. I know you're physically and emotionally drained, but you have to keep going.",
+      "My feelings are valid.",
+      "Your mental health is a priority. Your happiness is an essential. Your self-care is a necessity.",
+      "Recovery is not one and done. It is a lifelong journey that takes place one day, one step at a time.",
+      "You deserve to heal.",
+      "Happiness comes in waves, it'll find you again",
+      "You aren’t the things that haunt you. You aren’t the pain you feel.",
+      "You are enough. You have enough. You do enough.",
+      "It is not overreacting to ask for what you want and need.",
+      "You are strong for surviving.",
+      "Mental illness is not a personal failure."
+    ]
   };
 }
-
+randomAffirmation() {
+  this.setState({affirmation: this.state.affirmations[(Math.floor(Math.random() * 13))]});
+}
 render() {
   return (
     <Container>
       <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
         <Content>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>{this.state.affirmation}</Text>
           <Button
-            onPress={() => this.props.navigation.goBack()}
-            title="Go back home"
+            onPress={() => this.randomAffirmation()}
+            title="Change affirmation"
           />
           <Button
             title="Home"

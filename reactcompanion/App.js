@@ -41,7 +41,7 @@ class HomeScreen extends React.Component {
             <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
             <Content>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Home Screen</Text>
+                <Text>Welcome to Companion!</Text>
 
                 <Button title="Menu" onPress={() => this.props.navigation.openDrawer()} />
               </View>
@@ -55,6 +55,7 @@ class HomeScreen extends React.Component {
             <CustomHeader title={this.state.title} link= {() => this.props.navigation.openDrawer()} description= {this.state.description} />
             <Content>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Welcome to Companion!</Text>
                 <Button title="Login" onPress={() => this.props.navigation.navigate('Login')} />
               </View>
             </Content>

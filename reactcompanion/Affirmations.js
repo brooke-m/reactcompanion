@@ -51,7 +51,7 @@ render() {
         >
           <Content>
           <View style={{ flex: 1, paddingTop: 200, alignItems: 'center', justifyContent: 'center' }}>
-            >{this.state.affirmation}</Text>
+            <Text>{this.state.affirmation}</Text>
             <Button
               onPress={() => this.randomAffirmation()}
               title="Change affirmation"

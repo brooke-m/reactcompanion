@@ -19,21 +19,21 @@ export default class Task extends React.Component {
   constructor(props) {
     super(props);
     this.state = {title: 'Task',
-    description: 'This is the task page'
+    description: 'This is the task page',
     tasks: [
       {
         name: 'shower',
-        description: 'take some time to look after yourself'
+        description: 'take some time to look after yourself',
       },
       {
         name: 'medication',
-        description: 'consistency is key! you can do it!'
+        description: 'consistency is key! you can do it!',
       },
       {
         name: 'drink water',
-        description: 'hydration makes everything easier :)'
+        description: 'hydration makes everything easier :)',
       },
-    ]
+    ],
   };
 }
 
